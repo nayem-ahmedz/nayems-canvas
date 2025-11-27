@@ -15,9 +15,15 @@ export const authOptions = {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(credentials),
         });
+
         const user = await res.json();
-        if (res.ok && user) return user;
-        return null;
+
+        if (res.ok && user) {
+          return user; // login successful
+        }
+
+        // If login fails, throw error with backend message
+        throw new Error(user.message || "Invalid credentials");
       },
     }),
   ],
@@ -25,12 +31,17 @@ export const authOptions = {
   pages: { signIn: "/login" },
 
   callbacks: {
+    // Runs after login, updates JWT token
     async jwt({ token, user }) {
-      if (user?.photoURL) token.photoURL = user.photoURL; // attach photoURL to JWT
+      if (user?.photoURL) token.photoURL = user.photoURL;
+      if (user?.id) token.id = user.id; // include user ID in token
       return token;
     },
+
+    // Runs whenever useSession() is called, updates session
     async session({ session, token }) {
-      if (token?.photoURL) session.user.photoURL = token.photoURL; // include in session
+      if (token?.photoURL) session.user.photoURL = token.photoURL;
+      if (token?.id) session.user.id = token.id; // include user ID in session
       return session;
     },
   },

@@ -29,6 +29,7 @@ A simple blog website by Nayem Ahmed
 - lucide-icons
 - Mongoose
 - next auth
+- react toastify
 
 ## Project Timeline
 - Created on: 25 Nov 2025

@@ -3,6 +3,8 @@ import { motion } from "motion/react"
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Register() {
     const [error, setError] = useState('');
@@ -26,7 +28,6 @@ export default function Register() {
             setError('Password needs a lowercase letter');
             return;
         }
-        // console.log(name, email, photoURL, password);
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`, {
                 method: 'POST',
@@ -34,13 +35,14 @@ export default function Register() {
                 body: JSON.stringify({ name, email, photoURL, password })
             });
             const data = await res.json();
+
             if (!res.ok) {
                 setError(data.message || 'Something went wrong');
                 return;
             }
-            console.log('User registered:', data);
-            // Redirect to login page
-            router.push('/login');
+            // Success toast
+            toast.success("Registration successful! Redirecting to login...");
+            setTimeout(() => router.push('/login'), 2000); // redirect after 2s
         } catch (err) {
             console.error(err);
             setError('Server error. Please try again later.');
@@ -52,6 +54,7 @@ export default function Register() {
     return (
         <section className="flex justify-center w-full px-6">
             <title>Register | BiteShare</title>
+            <ToastContainer position="top-right" autoClose={3000} />
             <motion.div
                 className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl my-20"
                 initial={{ x: -100, opacity: 0 }}
