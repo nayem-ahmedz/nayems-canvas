@@ -26,8 +26,9 @@ A simple blog website by Nayem Ahmed
 ### Tools and Libraries
 - Google Fonts API: For stylish typography.
 - Next App Router: For routing between pages.
-- React Icons
+- lucide-icons
 - Mongoose
+- next auth
 
 ## Project Timeline
 - Created on: 25 Nov 2025

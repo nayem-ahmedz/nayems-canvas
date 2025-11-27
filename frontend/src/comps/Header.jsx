@@ -1,7 +1,17 @@
+'use client';
 import Link from "next/link";
 import Logo from "./UI/Logo";
+import { useSession, signOut } from 'next-auth/react';
+import { useState } from 'react';
 
 export default function Header() {
+    const { data: session, status } = useSession();
+    console.log(session)
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const handleLogout = () => {
+        console.log('Logout clicked');
+        signOut({ callbackUrl: '/' });
+    };
     const navLinks = <>
         <li> <Link href='/'>Home</Link> </li>
         <li> <Link href='/recentposts'>Recent Posts</Link> </li>
@@ -45,7 +55,27 @@ export default function Header() {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link href='/login' className="btn">Login</Link>
+                    {status === 'loading' ? (
+                        <span className="loading loading-dots loading-xl mr-5"></span>
+                    ) : session ? (
+                        <div className="dropdown dropdown-end">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img src={session.user.photoURL || '/media/default-avatar.png'} alt={session.user.name} />
+                                </div>
+                            </label>
+                            <ul
+                                tabIndex={0}
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                            >
+                                <li> <Link href='/add-blog' className='text-sm'>Add Blog</Link> </li>
+                                <li> <Link href='/manage-blogs' className='text-sm'>Manage Blogs</Link> </li>
+                                <li> <button className='text-sm' onClick={handleLogout}>Logout</button> </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <Link href='/login' className="btn btn-primary text-base">Login</Link>
+                    )}
                 </div>
             </nav>
         </header>
