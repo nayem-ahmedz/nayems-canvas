@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 export default function Header() {
     const { data: session, status } = useSession();
-    console.log(session)
+    // console.log(session)
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const handleLogout = () => {
         console.log('Logout clicked');
