@@ -73,7 +73,6 @@ To run the nayems-canvas application locally, follow these steps:
 Contributions are welcome! If you have suggestions for improvements, bug fixes, or new features, feel free to open an issue or submit a pull request.
 
 ## live link
-coming soon...
 [Nayems Canvas](https://nayems-canvas.vercel.app/)
 
 Feel free to contact for any query!
