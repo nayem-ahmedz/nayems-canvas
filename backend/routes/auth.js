@@ -5,56 +5,71 @@ const User = require('../models/Users');
 
 const router = express.Router();
 
-// Register
+// ---------------------------
+// REGISTER
+// ---------------------------
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password, photoURL } = req.body;
-    // check for existing user
+
+    // Check if user already exists
     const existing = await User.findOne({ email });
     if (existing) return res.status(400).json({ message: "Email already registered" });
-    // hashing password
+
+    // Hash password
     const hashed = await bcrypt.hash(password, 10);
+
+    // Create user
     const user = await User.create({
       name,
       email,
       password: hashed,
       photoURL
     });
-    // return consistent user object under `user`
+
+    // Return user object compatible with NextAuth
     res.status(201).json({
       user: {
-        _id: user._id,
+        id: user._id.toString(),
         name: user.name,
         email: user.email,
-        photoURL: user.photoURL
+        photoURL: user.photoURL || null
       }
     });
+
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 });
 
-// Login
+// ---------------------------
+// LOGIN
+// ---------------------------
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    // Find user
     const user = await User.findOne({ email });
     if (!user) return res.status(401).json({ message: "Invalid credentials" });
+
+    // Compare password
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return res.status(401).json({ message: "Invalid credentials" });
 
-    // return consistent user object under `user`
+    // Return user object compatible with NextAuth
     res.status(200).json({
       user: {
-        _id: user._id,
+        id: user._id.toString(),
         name: user.name,
         email: user.email,
-        photoURL: user.photoURL
+        photoURL: user.photoURL || null
       }
     });
+
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 });
