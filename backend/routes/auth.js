@@ -5,9 +5,7 @@ const User = require('../models/Users');
 
 const router = express.Router();
 
-// ---------------------------
 // REGISTER
-// ---------------------------
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password, photoURL } = req.body;
@@ -27,7 +25,7 @@ router.post("/register", async (req, res) => {
       photoURL
     });
 
-    // Return user object compatible with NextAuth
+    // Return user object for next auth
     res.status(201).json({
       user: {
         id: user._id.toString(),
@@ -43,9 +41,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// ---------------------------
 // LOGIN
-// ---------------------------
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -58,7 +54,7 @@ router.post("/login", async (req, res) => {
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return res.status(401).json({ message: "Invalid credentials" });
 
-    // Return user object compatible with NextAuth
+    // Return user object for next auth
     res.status(200).json({
       user: {
         id: user._id.toString(),

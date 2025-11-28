@@ -4,11 +4,12 @@ A simple blog website by Nayem Ahmed
 ## Overview
 **Nayems Canvas** is a modern web application built with React.js for the front-end and Node.js with Express for the back-end.
 
-<!-- ![Appovate Screenshot](./public/screenshots/appovate.webp) -->
+![Nayems Canvas Screenshot](./frontend/public/nayems-canvas-home.webp)
 
 ## Key Features
-- coming soon...
-<!-- - **Browse Featured and Trending Apps**: View featured and trending apps fetched from the backend. -->
+- trending blog posts on homepage
+- create account and read blog posts
+- add blog post, update blog post, delete a blog post
 
 ## Technologies Used
 
@@ -33,8 +34,8 @@ A simple blog website by Nayem Ahmed
 
 ## Project Timeline
 - Created on: 25 Nov 2025
-- Completed on: --
-- Last updated on: 25 Nov 2025
+- Completed on: 28 Nov 2025
+- Last updated on: 28 Nov 2025
 
 ## Installation Instructions
 To run the nayems-canvas application locally, follow these steps:
@@ -73,6 +74,6 @@ Contributions are welcome! If you have suggestions for improvements, bug fixes, 
 
 ## live link
 coming soon...
-<!-- [Nayems Canvas](https://appovate.netlify.app/) -->
+[Nayems Canvas](https://nayems-canvas.vercel.app/)
 
 Feel free to contact for any query!

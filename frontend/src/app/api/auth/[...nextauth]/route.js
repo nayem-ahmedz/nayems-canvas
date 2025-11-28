@@ -21,14 +21,11 @@ export const authOptions = {
             }),
           }
         );
-
         const data = await res.json();
-
         if (!res.ok) {
           throw new Error(data.message || "Invalid credentials");
         }
-
-        return data.user; // must return { id, name, email, photoURL }
+        return data.user;
       },
     }),
   ],
