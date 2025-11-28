@@ -61,6 +61,7 @@ export default function Register() {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
             >
+                <title>Create User Account</title>
                 <div className="card-body">
                     <h2 className="text-2xl md:text-3xl font-bold text-center">You are few steps away</h2>
                     <form onSubmit={handleSubmit}>

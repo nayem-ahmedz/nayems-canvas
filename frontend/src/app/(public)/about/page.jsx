@@ -1,6 +1,7 @@
 export default function About() {
   return (
-    <section className="max-w-5xl mx-auto mt-10 p-6 bg-white rounded shadow">
+    <section className="mt-10 p-6 bg-white rounded shadow containerr">
+      <title>About | Nayem's Canvas</title>
       {/* Header */}
       <header className="mb-8 text-center">
         <h1 className="text-4xl font-bold mb-2">About Us</h1>

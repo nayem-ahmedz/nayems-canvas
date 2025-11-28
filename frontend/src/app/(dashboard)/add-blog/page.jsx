@@ -78,6 +78,7 @@ export default function AddBlogPage() {
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-4 bg-white rounded shadow">
+      <title>Create A Blog Post</title>
       <ToastContainer position="top-right" autoClose={3000} />
       <h1 className="text-2xl font-bold mb-4">Add New Blog</h1>
       <form onSubmit={handleSubmit} className="space-y-4">

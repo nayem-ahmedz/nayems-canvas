@@ -50,7 +50,7 @@ export default function Login() {
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
         >
-            <title>Login | BiteShare</title>
+            <title>User Login</title>
             <ToastContainer position="top-right" autoClose={3000} />
             <motion.div
                 className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl my-20"

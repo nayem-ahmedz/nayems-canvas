@@ -12,11 +12,11 @@ export default function Hero() {
             <div className="hero-overlay"></div>
             <div className="hero-content text-neutral-content text-center">
                 <div className="max-w-md">
-                    <h1 className="mb-5 text-5xl font-bold">Nayem's Canvas</h1>
+                    <h1 className="mb-5 text-4xl md:text-5xl font-bold">Nayem's Canvas</h1>
                     <p className="mb-5">
-                        A simple blog website created by Nayem Ahmed. Read updated technical blog daily. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, in.
+                        A simple blog website created by Nayem Ahmed. Read updated technical blog daily. Create a user account and post your first blog
                     </p>
-                    <Link href='/register' className="btn btn-primary">Create a accout</Link>
+                    <Link href='/register' className="btn btn-primary">Create a Account</Link>
                 </div>
             </div>
         </section>

@@ -33,10 +33,11 @@ export default function Recent() {
   if (!posts.length) return <p className="text-center mt-6">No recent posts available.</p>;
 
   return (
-    <section className="max-w-5xl mx-auto mt-10 px-4">
+    <section className="mt-10 px-4 containerr">
+      <title>Recent Posts</title>
       <ToastContainer position="top-right" autoClose={3000} />
-      <h2 className="text-3xl font-bold text-center mb-6">Recent Posts</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <h2 className="text-3xl font-bold text-center my-6">Recent Posts</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {posts.map(post => (
           <PostCard key={post._id} post={post} />
         ))}

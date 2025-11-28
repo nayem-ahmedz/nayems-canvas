@@ -53,6 +53,7 @@ export default function ViewBlogPage() {
 
   return (
     <div className="max-w-3xl mx-auto mt-10 p-4 bg-white rounded shadow mb-10">
+      <title>Blog Details</title>
       <ToastContainer position="top-right" autoClose={3000} />
       <button
         className="btn btn-sm btn-outline mb-4"

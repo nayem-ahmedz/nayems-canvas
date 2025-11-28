@@ -26,7 +26,7 @@ export default function PostCard({ post }) {
           {post.title}
           <div className="badge badge-secondary">NEW</div>
         </h2>
-        {post.shortDesc && <p>{post.shortDesc}</p>}
+        {post.shortDesc && <p>{post.shortDesc.slice(0, 120)}...</p>}
 
         <div className="card-actions justify-end mt-2">
           <button

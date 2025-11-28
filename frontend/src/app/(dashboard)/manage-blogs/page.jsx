@@ -66,6 +66,7 @@ export default function ManageBlogsPage() {
 
   return (
     <div className="max-w-5xl mx-auto mt-10 p-4 bg-white rounded shadow">
+      <title>Manage Your Blogs</title>
       <ToastContainer position="top-right" autoClose={3000} />
       <h1 className="text-2xl font-bold mb-4">Manage Blogs</h1>
 

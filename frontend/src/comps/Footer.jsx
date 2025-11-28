@@ -1,4 +1,5 @@
 'use client';
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -7,6 +8,7 @@ export default function Footer() {
       <section className="footer sm:footer-horizontal p-10 max-w-7xl mx-auto">
         {/* Branding / About */}
         <aside>
+          <Image src='/media/logo.webp' alt='nayems canvas logo' width={200} height={200} className='w-10 md:w-20' />
           <h2 className="text-xl font-bold mb-2">Nayem's Canvas</h2>
           <p className="text-gray-400">
             A personal blog sharing insights, tutorials, and projects on web development, design, and tech.
