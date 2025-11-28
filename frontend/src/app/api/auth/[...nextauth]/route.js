@@ -9,6 +9,8 @@ export const authOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
+
+      // Called when user tries to log in
       async authorize(credentials) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, {
           method: "POST",
@@ -16,32 +18,39 @@ export const authOptions = {
           body: JSON.stringify(credentials),
         });
 
-        const user = await res.json();
+        const data = await res.json();
 
-        if (res.ok && user) {
-          return user; // login successful
+        if (!res.ok) {
+          throw new Error(data.message || "Invalid credentials");
         }
 
-        // If login fails, throw error with backend message
-        throw new Error(user.message || "Invalid credentials");
+        // backend returns { user: { _id, name, email, photoURL } }
+        return data.user;
       },
     }),
   ],
+
   session: { strategy: "jwt" },
   pages: { signIn: "/login" },
 
   callbacks: {
-    // Runs after login, updates JWT token
+    // Runs when JWT is created/updated
     async jwt({ token, user }) {
-      if (user?.photoURL) token.photoURL = user.photoURL;
-      if (user?.id) token.id = user.id; // include user ID in token
+      if (user) {
+        token.id = user._id;
+        token.name = user.name;
+        token.email = user.email;
+        token.photoURL = user.photoURL || null;
+      }
       return token;
     },
 
-    // Runs whenever useSession() is called, updates session
+    // Runs whenever useSession() is called
     async session({ session, token }) {
-      if (token?.photoURL) session.user.photoURL = token.photoURL;
-      if (token?.id) session.user.id = token.id; // include user ID in session
+      session.user.id = token.id;
+      session.user.name = token.name;
+      session.user.email = token.email;
+      session.user.photoURL = token.photoURL;
       return session;
     },
   },

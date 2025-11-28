@@ -1,3 +1,4 @@
+// backend/routes/auth.js
 const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/Users');
@@ -11,7 +12,7 @@ router.post("/register", async (req, res) => {
     // check for existing user
     const existing = await User.findOne({ email });
     if (existing) return res.status(400).json({ message: "Email already registered" });
-    // hasing password
+    // hashing password
     const hashed = await bcrypt.hash(password, 10);
     const user = await User.create({
       name,
@@ -19,11 +20,14 @@ router.post("/register", async (req, res) => {
       password: hashed,
       photoURL
     });
+    // return consistent user object under `user`
     res.status(201).json({
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      photoURL: user.photoURL
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        photoURL: user.photoURL
+      }
     });
   } catch (err) {
     console.log(err);
@@ -39,11 +43,15 @@ router.post("/login", async (req, res) => {
     if (!user) return res.status(401).json({ message: "Invalid credentials" });
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return res.status(401).json({ message: "Invalid credentials" });
+
+    // return consistent user object under `user`
     res.status(200).json({
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      photoURL: user.photoURL
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        photoURL: user.photoURL
+      }
     });
   } catch (err) {
     console.log(err);
